@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adams Illustrated Panorama of History, 1878</title>
+    <meta name="description" lang="da" content="Adams illustrerede verdenshistorie, 1878. Tavlen illustrerer verdenshistorien fra Adam og Eva frem til USA's nittende præsident: R. D. Hayes der var præsident fra 1877 til 1881."/>
+    <link rel="stylesheet" type="text/css" href="resources/juxta.css" />
+    <!-- https://github.com/Emigre/openseadragon-annotations -->
+    
+    <script src="resources/openseadragon.min.js"></script>
+    <style type="text/css">
+        .info_overlay {
+        border: 1px dotted grey;
+        }
+        .info_content {
+        visibility: hidden;
+        padding: 10% 10% 10% 10%;
+        }
+
+        .info_overlay:hover .info_content {
+        width: 100%;
+        height: 100%;
+        visibility: visible;
+        }
+        .info_aoi {
+        width: 100%;
+        height: 100%;
+        border: 3px solid blue;
+        border-radius: 50%;
+        background: #aaa;
+        opacity: 0.5;
+        pointer-events: none;
+        }
+        .info_text {
+        width: 100%;
+        min-width: 20em;
+        border: 1px solid black;
+        position: relative;
+        top: -2em;
+        background: #fff;
+        opacity: 0.9;
+        color: black;
+        pointer-events: all;
+        }
+    </style>
+    <!-- This is planned to be exposed to the public under labs.kb.dk.
+         It will get some polish and some meta data before that. --> 
+</head>
+<body>
+    <div id="pageheader">
+        <h1>Adams Illustrated Panorama of History, 1878 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img src="resources/CC-BY-SA_icon.svg" title="CC BY-SA" style="height: 1em; vertical-align: text-bottom"/></a></h1>
+        <p>Open demo under further development. See <a href="http://galleri.au.dk/aul/ShowRecord.jsp?server=galleri.au.dk&catalogName=Anskuelsesbilleder&recordID=1218&encoding=UTF-8">galleri.au.dk</a> for information on the piece. <a href="http://labs.kb.dk/">Back to KB Labs</a></p>
+    </div>
+
+    <div id="zoom-display" class="openseadragon"><div id="header"></div><div id="infobox"></div><div id="footer">sss</div></div>
+    <div id="info_1" class="info_overlay">
+        <div class="info_content">
+            <div class="info_aoi"/>
+            <div class="info_text">Tellus: <a href="https://en.wikipedia.org/wiki/Earth" onclick="window.location='https://en.wikipedia.org/wiki/Earth'">Third rock from the sun</a></div>
+        </div>
+    </div>
+    
+
+    <script type="text/javascript">
+        var myDragon = OpenSeadragon({
+        id:            "zoom-display",
+        
+        zoomPerScroll: 2.0,
+        showNavigator:  false,
+        wrapHorizontal: false,
+        prefixUrl: "resources/images/",
+        tileSources: "18068.dzi",
+        overlays: [
+        {id: 'info_1', x: 0.0028, y: 0.049, width: 0.049, height: 0.049}
+        ]});
+    </script>
+
+    <!-- https://github.com/openseadragon/openseadragon/issues/1545 -->
+    <!-- Update URL with position and zoom -->
+    <script type="text/javascript">
+        function precise(x) {
+          return Number.parseFloat(x).toPrecision(4);
+        }
+        var tracker = new OpenSeadragon.MouseTracker({
+          element: myDragon.container,
+          moveHandler: function (event) {
+            var viewportBounds = myDragon.viewport.getBounds();
+//            var tiledImage = myDragon.world.getItemAt(0); // Assuming you want the first (or only) image
+//            var imageBounds = tiledImage.viewportToImageRectangle(viewportBounds);
+            var posJSON = 'x:' + precise(viewportBounds.x) + ',y:' + precise(viewportBounds.y) +
+                          ',w:' + precise(viewportBounds.width) + ',h:' + precise(viewportBounds.height);
+
+            if (window.history.replaceState) {
+              newLoc = window.location.href.replace(/#.*/, "") + '#' + posJSON;
+              window.history.replaceState({ }, document.title, newLoc);
+            }
+          }
+        });
+    </script>
+    <!-- Update URL with position and zoom -->
+    <script type="text/javascript">
+        var gotoURL = function() {
+          var myRegexp = /.*#x:([0-9.-]+),y:([0-9.-]+),w:([0-9.-]+),h:([0-9.-]+)/
+          var match = myRegexp.exec(window.location.href);
+          if (match) {
+            var rect = new OpenSeadragon.Rect(parseFloat(match[1]), parseFloat(match[2]), parseFloat(match[3]), parseFloat(match[4]));
+            myDragon.viewport.fitBounds(rect);
+          }
+        }
+        myDragon.viewport.viewer.addHandler("open", gotoURL);
+        window.onhashchange = gotoURL;
+        window.onload = gotoURL;
+    </script>
+</body>
+</html>
