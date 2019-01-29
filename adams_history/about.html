@@ -20,11 +20,14 @@
     </p>
     <p style="width: 8em; float: right; margin-left: 1em;"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img src="resources/CC-BY-SA_icon.svg" title="CC BY-SA" style="width: 8em; vertical-align: text-bottom"/></a></p>
     <ul>
-        <li><a href="18068_Adams_Illustrated_Panorama_of_History_1878_size_104345x11288.tif">104345x11288 pixels (1177 MPixel), TIFF, 3.3GB</a> (raw digitization used for this page)</li>
+        <li><a href="18068_Adams_Illustrated_Panorama_of_History_1878_size_104345x11288.tif">104345x11288 pixels (1177 MPixel), TIFF, 3.3GB</a> (raw digitization used for the Adams visualization)</li>
         <li><a href="18068_Adams_Illustrated_Panorama_of_History_1878_size_65500x7086_q80.jpg">65500x7086 pixels (464 MPixel), JPEG, 96MB</a> (max dimensions allowed by the JPEG format)</li>
         <li><a href="18068_Adams_Illustrated_Panorama_of_History_1878_size_32000x3462_q80.jpg">32000x3462 pixels (110 MPixel), JPEG, 29MB</a> (max compatibility with JPEG viewers)</li>
     </ul>
     <h2>Technical</h2>
+    <p>
+        The project can be found at GitHub <a href="https://github.com/statsbiblioteket/anskuelse">statsbiblioteket/anskuelse</a>.
+    </p>
     <ul>
         <li>The base presentation was created using the excellent tool <a href="https://jcupitt.github.io/libvips/">libvips</a> for image processing and the equally excellent <a href="https://openseadragon.github.io/">OpenSeadragon</a> for display</li>
         <li>Bookmarking functionality was added using callback-hooks and the zoom &amp; pan-API from OpenSeadragon, with a bit of JavaScript-glue</li>
@@ -39,7 +42,16 @@
         <li>One of the interesting properties of the Adams piece is the huge amount of distinct information that it holds. There are thousands of areas of interests, from <a href="./#x:0.6238,y:0.01968,w:0.02604,h:0.01564">a 10 horned beast</a> to <a href="./#x:0.9197,y:0.07040,w:0.01302,h:0.007819">the cardiovascular system</a>. This calls for an accessible annotation system with a visualization of the areas of interest that does not overwhelm the user. One technical challenge here is that OpenSeadragon overlays does not scale well into thousands of overlays</li>
         <li>The Adams piece is visually impressive and displays well on large screens. Adding a demo-mode where the view is automatically panned &amp; zoomed is one way of keep such a display interesting. It could be a random walk or it could be between pre-selected areas of interest. It would combine well with annotations</li>
     </ul>
-
-    <p><a href=".">Back to the Adams visualization</a></p>
+    <h2>Contact</h2>
+    <p>
+        We welcome feedback and ideas for future development.
+    </p>
+    <ul>
+        <li><em>JavaScript/CSS/HTML:</em> Jesper lauridsen <a href="https://twitter.com/justjspr">@justjspr</a> / <a href="email:jla@kb.dk">jla@kb.dk</a></li>
+        <li><em>JavaScript light/Image processing:</em> Toke Eskildsen <a href="https://twitter.com/TokeEskildsen">@TokeEskildsen</a> / <a href="email:toes@kb.dk">toes@kb.dk</a></li>
+        <li><em>In charge:</em> Katrine Hofmann Gasser <a href="email:khg@kb.dk">khg@kb.dk</a></li>
+    </ul>
+    
+    <p><a href=".">Back to Adams visualization</a></p>
 </body>
 </html>
