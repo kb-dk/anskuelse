@@ -59,7 +59,7 @@
 <body>
     <div id="pageheader">
         <h1>Adams Illustrated Panorama of History, 1878 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><img src="resources/CC-BY-SA_icon.svg" title="CC BY-SA" style="height: 1em; vertical-align: text-bottom"/></a></h1>
-        <p>Open demo under further development. See <a href="http://galleri.au.dk/aul/ShowRecord.jsp?server=galleri.au.dk&catalogName=Anskuelsesbilleder&recordID=1218&encoding=UTF-8">galleri.au.dk</a> for information on the piece. <a href="http://labs.kb.dk/">Back to KB Labs</a></p>
+        <p>Open demo under further development. See the <a href="about.html">about page</a> for information. <a href="http://labs.kb.dk/">Back to KB Labs</a></p>
     </div>
 
     <div id="zoom-display" class="openseadragon"><div id="header"></div><div id="infobox"></div><div id="footer">sss</div></div>
@@ -86,6 +86,24 @@
         setupView(myDragon)
     </script>
 
+    <!-- Pan and zoom to bookmarked position. Must be before the callback below to avoid timing problems upon open -->
+    <script type="text/javascript">
+        // We store the match immediately so that the MouseTracker does not mess up the initial URL
+        var myRegexp = /.*#x:([0-9.-]+),y:([0-9.-]+),w:([0-9.-]+),h:([0-9.-]+)/
+        var match = myRegexp.exec(window.location.href);
+        
+        var gotoURL = function() {
+          if (match) {
+            var rect = new OpenSeadragon.Rect(parseFloat(match[1]), parseFloat(match[2]), parseFloat(match[3]), parseFloat(match[4]));
+            myDragon.viewport.fitBounds(rect);
+          }
+        }
+        
+        myDragon.viewport.viewer.addHandler("open", gotoURL);
+        window.onhashchange = gotoURL;
+        window.onload = gotoURL;
+    </script>
+
     <!-- https://github.com/openseadragon/openseadragon/issues/1545 -->
     <!-- Update URL with position and zoom -->
     <script type="text/javascript">
@@ -107,20 +125,6 @@
             }
           }
         });
-    </script>
-    <!-- Update URL with position and zoom -->
-    <script type="text/javascript">
-        var gotoURL = function() {
-          var myRegexp = /.*#x:([0-9.-]+),y:([0-9.-]+),w:([0-9.-]+),h:([0-9.-]+)/
-          var match = myRegexp.exec(window.location.href);
-          if (match) {
-            var rect = new OpenSeadragon.Rect(parseFloat(match[1]), parseFloat(match[2]), parseFloat(match[3]), parseFloat(match[4]));
-            myDragon.viewport.fitBounds(rect);
-          }
-        }
-        myDragon.viewport.viewer.addHandler("open", gotoURL);
-        window.onhashchange = gotoURL;
-        window.onload = gotoURL;
     </script>
 </body>
 </html>
