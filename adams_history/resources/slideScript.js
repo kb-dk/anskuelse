@@ -3,7 +3,7 @@ function setupView(dragon) {
   let transition;
   let myDragon = dragon;
   let initialized = new Date().getTime();
-  let doSteps = new Date().getTime() + 15000;
+  let doSteps = new Date().getTime() + 180000;
   let interval;
   let intervalSet = false;
   console.log("And, here... we.... go!", myDragon.viewport);
@@ -48,7 +48,7 @@ function setupView(dragon) {
   // setTimeout to check idle status.
   // it continues indefinitely.
   setTimeout(checkIdleStatus, 1000);
-  document.addEventListener("click", function() {
+  myDragon.addHandler("canvas-click", function() {
     myDragon.viewport.zoomSpring.animationTime = 1.2;
     myDragon.viewport.zoomSpring.springStiffness = 6.5;
     myDragon.viewport.centerSpringX.animationTime = 1.2;
@@ -59,7 +59,7 @@ function setupView(dragon) {
     myDragon.viewport.centerSpringX.exponential = undefined;
     myDragon.viewport.centerSpringY.exponential = undefined;
     initialized = new Date().getTime();
-    doSteps = new Date().getTime() + 15000;
+    doSteps = new Date().getTime() + 180000;
     clearInterval(interval);
     intervalSet = false;
     setTimeout(checkIdleStatus, 1000);
@@ -73,7 +73,7 @@ function setupView(dragon) {
       animate();
       interval = setInterval(() => {
         animate();
-      }, 6000);
+      }, 10000);
     } else {
       setTimeout(checkIdleStatus, 1000);
     }
