@@ -49,6 +49,15 @@ function setupView(dragon) {
   setTimeout(checkIdleStatus, 1000);
 
   document.addEventListener("click", function() {
+    myDragon.viewport.zoomSpring.animationTime = 1.2;
+    myDragon.viewport.zoomSpring.springStiffness = 6.5;
+    myDragon.viewport.centerSpringX.animationTime = 1.2;
+    myDragon.viewport.centerSpringX.springStiffness = 6.5;
+    myDragon.viewport.centerSpringY.animationTime = 1.2;
+    myDragon.viewport.centerSpringY.springStiffness = 6.5;
+    myDragon.viewport.zoomSpring.exponential = undefined;
+    myDragon.viewport.centerSpringX.exponential = undefined;
+    myDragon.viewport.centerSpringY.exponential = undefined;
     initialized = new Date().getTime();
     doSteps = new Date().getTime() + 15000;
     clearInterval(interval);
@@ -57,10 +66,11 @@ function setupView(dragon) {
   });
 
   function checkIdleStatus() {
-    console.log("checking status");
+    // Checking time
     if (doSteps < initialized && intervalSet === false) {
       intervalSet = true;
-      console.log("Time to start, yay!") / animate();
+      //Time to start
+      animate();
       interval = setInterval(() => {
         animate();
       }, 6000);
