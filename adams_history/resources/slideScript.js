@@ -3,7 +3,7 @@ function setupView(dragon) {
   let transition;
   let myDragon = dragon;
   let initialized = new Date().getTime();
-  let doSteps = new Date().getTime() + 5000;
+  let doSteps = new Date().getTime() + 15000;
   let interval;
   let intervalSet = false;
   console.log("And, here... we.... go!", myDragon.viewport);
