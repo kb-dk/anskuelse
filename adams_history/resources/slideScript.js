@@ -39,6 +39,14 @@ function setupView(dragon) {
       myDragon.viewport.centerSpringX.exponential = false;
       myDragon.viewport.centerSpringY.exponential = false;
       myDragon.viewport.fitBounds(box);
+      var viewportBounds = myDragon.viewport.getBounds();
+      var posJSON = 'x:' + precise(viewportBounds.x) + ',y:' + precise(viewportBounds.y) +
+                          ',w:' + precise(viewportBounds.width) + ',h:' + precise(viewportBounds.height);
+
+            if (window.history.replaceState) {
+              newLoc = window.location.href.replace(/#.*/, "") + '#' + posJSON;
+              window.history.replaceState({ }, document.title, newLoc);
+            }
     };
     transition();
     spotArray.push(spot);
@@ -47,7 +55,6 @@ function setupView(dragon) {
   // setTimeout to check idle status.
   // it continues indefinitely.
   setTimeout(checkIdleStatus, 1000);
-
   document.addEventListener("click", function() {
     myDragon.viewport.zoomSpring.animationTime = 1.2;
     myDragon.viewport.zoomSpring.springStiffness = 6.5;
