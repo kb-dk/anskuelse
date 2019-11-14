@@ -39,14 +39,7 @@ function setupView(dragon) {
       myDragon.viewport.centerSpringX.exponential = false;
       myDragon.viewport.centerSpringY.exponential = false;
       myDragon.viewport.fitBounds(box);
-      var viewportBounds = myDragon.viewport.getBounds();
-      var posJSON = 'x:' + precise(viewportBounds.x) + ',y:' + precise(viewportBounds.y) +
-                          ',w:' + precise(viewportBounds.width) + ',h:' + precise(viewportBounds.height);
-
-            if (window.history.replaceState) {
-              newLoc = window.location.href.replace(/#.*/, "") + '#' + posJSON;
-              window.history.replaceState({ }, document.title, newLoc);
-            }
+      updateCoordinatesInURL();
     };
     transition();
     spotArray.push(spot);
@@ -85,5 +78,18 @@ function setupView(dragon) {
       setTimeout(checkIdleStatus, 1000);
     }
     initialized = new Date().getTime();
+  }
+}
+
+function updateCoordinatesInURL() {
+  var viewportBounds = myDragon.viewport.getBounds();
+  // var tiledImage = myDragon.world.getItemAt(0); // Assuming you want the first (or only) image
+  // var imageBounds = tiledImage.viewportToImageRectangle(viewportBounds);
+  var posJSON = 'x:' + precise(viewportBounds.x) + ',y:' + precise(viewportBounds.y) +
+                ',w:' + precise(viewportBounds.width) + ',h:' + precise(viewportBounds.height);
+
+  if (window.history.replaceState) {
+    newLoc = window.location.href.replace(/#.*/, "") + '#' + posJSON;
+    window.history.replaceState({ }, document.title, newLoc);
   }
 }
