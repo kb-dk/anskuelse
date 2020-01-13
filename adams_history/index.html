@@ -83,7 +83,7 @@
         overlays: [
         {id: 'info_1', x: 0.0028, y: 0.049, width: 0.049, height: 0.049}
         ]});
-        setupView(myDragon)
+//        setupView(myDragon)
     </script>
 
     <!-- Pan and zoom to bookmarked position. Must be before the callback below to avoid timing problems upon open -->
@@ -125,6 +125,17 @@
             }
           }
         });
+    </script>
+    <script>
+    setupDemoMode(myDragon, 180000, 50000, 45);
+/*setupDemoMode(myDragon, 2000, 1000, 3);*/
+
+function demoModeStarted() {
+  console.log("Starting demo mode");
+}
+function demoModeStopped() {
+  console.log("Stopping demo mode");
+}
     </script>
 </body>
 </html>
